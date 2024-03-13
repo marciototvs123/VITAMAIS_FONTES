@@ -1,0 +1,357 @@
+[33mcommit e1a6d4a7db157c666d5f46c22acac5ed61bc184e[m
+Author: Marcio Da Silva <130993360+marciototvs123@users.noreply.github.com>
+Date:   Fri Feb 16 15:31:46 2024 -0300
+
+    16022024
+
+[1mdiff --git a/.vscode/.advpl/_binary_class.prw b/.vscode/.advpl/_binary_class.prw[m
+[1mnew file mode 100644[m
+[1mindex 0000000..eba78c5[m
+[1m--- /dev/null[m
+[1m+++ b/.vscode/.advpl/_binary_class.prw[m
+[36m@@ -0,0 +1,10213 @@[m
+[32m+[m[32m#include "protheus.ch"[m
+[32m+[m[32m/*/{Protheus.doc} brgetddb[m
+[32m+[m[32mCria um objeto do tipo grade com registros em linhas e informações em colunas.[m
+[32m+[m
+[32m+[m[32m@type binary class[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/brgetddb[m
+[32m+[m
+[32m+[m[32m/*/[m
+[32m+[m[32mclass brgetddb from MsBrGetDBase[m
+[32m+[m[32mdata caliastrb as character[m
+[32m+[m[32mmethod new()[m
+[32m+[m[32mend class[m
+[32m+[m[32m/*/{Protheus.doc} brgetddb:new[m
+[32m+[m[32mMétodo construtor da classe.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@return object, Nova instância da classe BrGetDDB[m
+[32m+[m
+[32m+[m[32m@param [nrow], numeric, Indica a coordenada vertical superior do objeto.[m
+[32m+[m[32m@param [ncol], numeric, Indica a coordenada horizontal à esquerda do objeto.[m
+[32m+[m[32m@param [nwidth], numeric, Indica a coordenada vertical inferior do objeto.[m
+[32m+[m[32m@param [nheight], numeric, Indica a coordenada horizontal à direita do objeto.[m
+[32m+[m[32m@param [bline], codeblock, Indica o bloco de código da lista de campos. Observação: Este parâmetro é utilizado quando o browse trabalha com array.[m
+[32m+[m[32m@param [aheaders], array, Indica o título dos campos no cabeçalho.[m
+[32m+[m[32m@param [acolsizes], array, Indica a largura das colunas.[m
+[32m+[m[32m@param [ownd], object, Indica a janela ou controle visual onde o objeto será criado.[m
+[32m+[m[32m@param [cfield], character, Indica os campos necessários para o filtro.[m
+[32m+[m[32m@param [uval1], character, Indica o início do intervalo para o filtro.[m
+[32m+[m[32m@param [uval2], character, Indica o fim do intervalo para o filtro.[m
+[32m+[m[32m@param [bchange], codeblock, Indica o bloco de código que será executado quando o estado ou conteúdo do objeto é modificado pela ação sobre o controle visual.[m
+[32m+[m[32m@param [bldblclick], codeblock, Indica o bloco de código que será executado quando clicar duas vezes, com o botão esquerdo do mouse, sobre o objeto.[m
+[32m+[m[32m@param [brclick], codeblock, Indica o bloco de código que será executado quando clicar, com o botão direito do mouse, sobre o objeto.[m
+[32m+[m[32m@param [ofont], object, Indica o objeto do tipo TFont utilizado para definir as características da fonte aplicada na exibição do conteúdo do controle visual.[m
+[32m+[m[32m@param [ocursor], object, Indica o tipo de ponteiro do mouse.[m
+[32m+[m[32m@param [nclrfore], numeric, Indica a cor do texto do componente.[m
+[32m+[m[32m@param [nclrback], numeric, Indica a cor de fundo do componente.[m
+[32m+[m[32m@param [cmsg], character, Indica a mensagem que será apresentada ao posicionar o ponteiro do mouse sobre o objeto.[m
+[32m+[m[32m@param [uparam20], logical, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [calias], character, Alias a ser utilizado como fonte dos registros do componente. No caso da fonte ser um array, deixar vazio.[m
+[32m+[m[32m@param [lpixel], logical, Indica se considera as coordenadas passadas em pixels \(.T.\) ou caracteres \(.F.\).[m
+[32m+[m[32m@param [bwhen], codeblock, Indica o bloco de código que será executado quando a mudança de foco da entrada de dados, no objeto criado, estiver sendo realizada. Se o retorno for verdadeiro \(.T.\), o objeto continua habilitado; caso contrário, falso \(.F.\).[m
+[32m+[m[32m@param [uparam24], logical, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [bvalid], codeblock, Indica o bloco de código de validação que será executado quando o conteúdo do objeto for modificado. Retorna verdadeiro \(.T.\), se o conteúdo é válido; caso contrário, falso \(.F.\).[m
+[32m+[m[32m@param [uparam26], array, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [uparam27], object, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/new[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod new(nrow, ncol, nwidth, nheight, bline, aheaders, acolsizes, ownd, cfield, uval1, uval2, bchange, bldblclick, brclick, ofont, ocursor, nclrfore, nclrback, cmsg, uparam20, calias, lpixel, bwhen, uparam24, bvalid, uparam26, uparam27) class brgetddb[m
+[32m+[m[32mreturn[m
+[32m+[m
+[32m+[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase[m
+[32m+[m[32mCria um objeto do tipo grade com registros em linhas e informações em colunas.[m
+[32m+[m
+[32m+[m[32m@type binary class[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/msbrgetdbase[m
+[32m+[m
+[32m+[m[32m/*/[m
+[32m+[m[32mclass msbrgetdbase from TCBrowse[m
+[32m+[m[32mdata bdelete as codeblock[m
+[32m+[m[32mdata bempty as codeblock[m
+[32m+[m[32mdata bmove as codeblock[m
+[32m+[m[32mdata bnoaltered as codeblock[m
+[32m+[m[32mdata badd as codeblock[m
+[32m+[m[32mdata bcustomeditcol as codeblock[m
+[32m+[m[32mmethod new()[m
+[32m+[m[32mmethod callrefresh()[m
+[32m+[m[32mmethod goup()[m
+[32m+[m[32mmethod godown()[m
+[32m+[m[32mmethod goleft()[m
+[32m+[m[32mmethod goright()[m
+[32m+[m[32mmethod goposition()[m
+[32m+[m[32mmethod gotop()[m
+[32m+[m[32mmethod gobottom()[m
+[32m+[m[32mmethod pageup()[m
+[32m+[m[32mmethod pagedown()[m
+[32m+[m[32mmethod recadd()[m
+[32m+[m[32mend class[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:new[m
+[32m+[m[32mMétodo construtor da classe.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@return object, Nova instância da classe MsBrGetDBase[m
+[32m+[m
+[32m+[m[32m@param [nrow], numeric, Indica a coordenada vertical superior do objeto.[m
+[32m+[m[32m@param [ncol], numeric, Indica a coordenada horizontal à esquerda do objeto.[m
+[32m+[m[32m@param [nwidth], numeric, Indica a coordenada vertical inferior do objeto.[m
+[32m+[m[32m@param [nheight], numeric, Indica a coordenada horizontal à direita do objeto.[m
+[32m+[m[32m@param [bline], codeblock, Indica o bloco de código da lista de campos. Observação: Este parâmetro é utilizado quando o browse trabalha com array.[m
+[32m+[m[32m@param [aheaders], array, Indica o título dos campos no cabeçalho.[m
+[32m+[m[32m@param [acolsizes], array, Indica a largura das colunas.[m
+[32m+[m[32m@param [ownd], object, Indica a janela ou controle visual onde o objeto será criado.[m
+[32m+[m[32m@param [cfield], character, Indica os campos necessários para o filtro.[m
+[32m+[m[32m@param [uval1], character, Indica o início do intervalo para o filtro.[m
+[32m+[m[32m@param [uval2], character, Indica o fim do intervalo para o filtro.[m
+[32m+[m[32m@param [bchange], codeblock, Indica o bloco de código que será executado quando o estado ou conteúdo do objeto é modificado pela ação sobre o controle visual.[m
+[32m+[m[32m@param [bldblclick], codeblock, Indica o bloco de código que será executado quando clicar duas vezes, com o botão esquerdo do mouse, sobre o objeto.[m
+[32m+[m[32m@param [brclick], codeblock, Indica o bloco de código que será executado quando clicar, com o botão direito do mouse, sobre o objeto.[m
+[32m+[m[32m@param [ofont], object, Indica o objeto do tipo TFont utilizado para definir as características da fonte aplicada na exibição do conteúdo do controle visual.[m
+[32m+[m[32m@param [ocursor], object, Indica o tipo de ponteiro do mouse.[m
+[32m+[m[32m@param [nclrfore], numeric, Indica a cor do texto do componente.[m
+[32m+[m[32m@param [nclrback], numeric, Indica a cor de fundo do componente.[m
+[32m+[m[32m@param [cmsg], character, Indica a mensagem que será apresentada ao posicionar o ponteiro do mouse sobre o objeto.[m
+[32m+[m[32m@param [uparam20], logical, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [calias], character, Alias a ser utilizado como fonte dos registros do componente. No caso da fonte ser um array, deixar vazio.[m
+[32m+[m[32m@param [lpixel], logical, Indica se considera as coordenadas passadas em pixels \(.T.\) ou caracteres \(.F.\).[m
+[32m+[m[32m@param [bwhen], codeblock, Indica o bloco de código que será executado quando a mudança de foco da entrada de dados, no objeto criado, estiver sendo realizada. Se o retorno for verdadeiro \(.T.\), o objeto continua habilitado; caso contrário, falso \(.F.\).[m
+[32m+[m[32m@param [uparam24], logical, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [bvalid], codeblock, Indica o bloco de código de validação que será executado quando o conteúdo do objeto for modificado. Retorna verdadeiro \(.T.\), se o conteúdo é válido; caso contrário, falso \(.F.\).[m
+[32m+[m[32m@param [uparam26], array, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@param [uparam27], object, Compatibility parameter. Pass NIL.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/new[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod new(nrow, ncol, nwidth, nheight, bline, aheaders, acolsizes, ownd, cfield, uval1, uval2, bchange, bldblclick, brclick, ofont, ocursor, nclrfore, nclrback, cmsg, uparam20, calias, lpixel, bwhen, uparam24, bvalid, uparam26, uparam27) class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:callrefresh[m
+[32m+[m[32mForça a atualização do browse.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/callrefresh[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod callrefresh() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:goup[m
+[32m+[m[32mPosiciona o ponteiro do browse uma célula acima de onde está.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/goup[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod goup() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:godown[m
+[32m+[m[32mPosiciona o ponteiro do browse uma célula abaixo de onde está..[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/godown[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod godown() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:goleft[m
+[32m+[m[32mPosiciona o ponteiro do browse uma célula a esquerda de onde está..[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/goleft[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod goleft() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:goright[m
+[32m+[m[32mPosiciona o ponteiro do browse uma célula a direita de onde está..[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/goright[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod goright() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:goposition[m
+[32m+[m[32mPosiciona o ponteiro do browse em uma linha específica.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param [nlin], numeric, Número da linha a ser selecionada pelo cursor.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/goposition[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod goposition(nlin) class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:gotop[m
+[32m+[m[32mPosiciona o ponteiro do browse na primeira linha.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/gotop[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod gotop() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:gobottom[m
+[32m+[m[32mPosiciona o ponteiro do browse na última linha.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/gobottom[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod gobottom() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:pageup[m
+[32m+[m[32mFaz o ponteiro do browse saltar um número de linhas para cima.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param [nlines], numeric, Número de linhas a serem saltadas para cima.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/pageup[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod pageup(nlines) class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:pagedown[m
+[32m+[m[32mFaz o ponteiro do browse saltar um número de linhas para baixo.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param [nlines], numeric, Número de linhas a serem saltadas para baixo.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/pagedown[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod pagedown(nlines) class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} msbrgetdbase:recadd[m
+[32m+[m[32mExecuta o codeblock bAdd.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/recadd[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod recadd() class msbrgetdbase[m
+[32m+[m[32mreturn[m
+[32m+[m
+[32m+[m
+[32m+[m[32m/*/{Protheus.doc} mscalend[m
+[32m+[m[32mCria um objeto do tipo calendário.[m
+[32m+[m
+[32m+[m[32m@type binary class[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/mscalend[m
+[32m+[m
+[32m+[m[32m/*/[m
+[32m+[m[32mclass mscalend from TControl[m
+[32m+[m[32mdata bchange as codeblock[m
+[32m+[m[32mdata bchangemes as codeblock[m
+[32m+[m[32mdata ddiaatu as date[m
+[32m+[m[32mdata ddiaini as date[m
+[32m+[m[32mdata ddiafim as date[m
+[32m+[m[32mdata canmultsel as logical[m
+[32m+[m[32mmethod new()[m
+[32m+[m[32mmethod addrestri()[m
+[32m+[m[32mmethod addr_prev()[m
+[32m+[m[32mmethod addr_next()[m
+[32m+[m[32mmethod delrestri()[m
+[32m+[m[32mmethod delr_prev()[m
+[32m+[m[32mmethod delr_next()[m
+[32m+[m[32mmethod delallrestri()[m
+[32m+[m[32mmethod colorday()[m
+[32m+[m[32mmethod ctrlrefresh()[m
+[32m+[m[32mend class[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:new[m
+[32m+[m[32mMétodo construtor da classe.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@return object, Nova instância da classe MsCalend[m
+[32m+[m
+[32m+[m[32m@param [nrow], numeric, Indica a coordenada vertical.[m
+[32m+[m[32m@param [ncol], numeric, Indica a coordenada horizontal.[m
+[32m+[m[32m@param [ownd], object, Indica a janela ou controle visual onde o objeto será criado.[m
+[32m+[m[32m@param [lcanmultsel], logical, Indica se habilita \(.T.\) ou desabilita \(.F.\) a seleção de múltiplos dias.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/new[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod new(nrow, ncol, ownd, lcanmultsel) class mscalend[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:addrestri[m
+[32m+[m[32mAdiciona uma data com restrição no calendário.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param <ndia>, numeric, Indica a data que será restringida.[m
+[32m+[m[32m@param <ncorfonte>, numeric, Indica a cor da fonte.[m
+[32m+[m[32m@param [ncorborda], numeric, Indica a cor da borda.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/addrestri[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod addrestri(ndia, ncorfonte, ncorborda) class mscalend[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:addr_prev[m
+[32m+[m[32mAdiciona uma data com restrição no calendário \(?\).[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param <ndia>, numeric, Indica a data que será restringida.[m
+[32m+[m[32m@param <ncorfonte>, numeric, Indica a cor da fonte.[m
+[32m+[m[32m@param [ncorborda], numeric, Indica a cor da borda.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/addr_prev[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod addr_prev(ndia, ncorfonte, ncorborda) class mscalend[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:addr_next[m
+[32m+[m[32mAdiciona uma data com restrição no calendário \(?\).[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param <ndia>, numeric, Indica a data que será restringida.[m
+[32m+[m[32m@param <ncorfonte>, numeric, Indica a cor da fonte.[m
+[32m+[m[32m@param [ncorborda], numeric, Indica a cor da borda.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/addr_next[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod addr_next(ndia, ncorfonte, ncorborda) class mscalend[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:delrestri[m
+[32m+[m[32mExclui a restrição de uma determinada data.[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param [ndia], numeric, Indica a data para excluir a restrição.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/display/tec/delrestri[m
+[32m+[m[32m/*/[m
+[32m+[m[32mmethod delrestri(ndia) class mscalend[m
+[32m+[m[32mreturn[m
+[32m+[m[32m/*/{Protheus.doc} mscalend:delr_prev[m
+[32m+[m[32mExclui a restrição de uma determinada data \(?\).[m
+[32m+[m
+[32m+[m[32m@type method[m
+[32m+[m
+[32m+[m[32m@param [ndia], numeric, Indica a data para excluir a restrição.[m
+[32m+[m[32m@author [VP Tecnologia](https://tdn.totvs.com/display/tec) - [TOTVS S.A.](https://www.totvs.com/)[m
+[32m+[m[32m@see https://tdn.totvs.com/displa
